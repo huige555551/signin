@@ -1,0 +1,44 @@
+extend layout
+
+block content
+	h1 用户注册
+	form#signup(method="post",accept-charset="utf-8",action="/signup", onsubmit="return check()")
+		if error
+			div.error.server!=error
+		div.field
+			lable(for="username") 用户名
+			input#username(type="text",name="username")
+			span.error
+
+		div.field
+			lable(for="password") 密码
+			input#password(type="text",name="password")
+			span.error
+
+		div.field
+			lable(for="repeat-password") 重复密码
+			input#repeatPassword(type="text")
+			span.error
+
+		div.field
+			lable 学号&nbsp;&nbsp;&nbsp;
+			input#studentId(type="text",name="studentId")
+			span.error
+
+		div.field
+			lable 电话&nbsp;&nbsp;&nbsp;
+			input#telephone(type="text",name="telephone")
+			span.error
+
+		div.field
+			lable 邮箱&nbsp;&nbsp;&nbsp;
+			input#email(type="text",name="email")
+			span.error
+
+		div.field
+			input#reset(type="reset",value="重置")
+			input#submit(type="submit",value="提交")
+			a(href="/signin")
+				input(type="button",value="登陆")
+	script(src="/javascripts/validator.js")
+	script(src="/javascripts/signup.js")

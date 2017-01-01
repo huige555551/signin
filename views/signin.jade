@@ -1,0 +1,21 @@
+extend layout
+
+block content
+    h1 用户登录
+    form#signin(method="post",accept-charset="utf-8",action="/signin")
+        if error
+            div.error.server!=error
+        div.field
+            lable(for="username") 用户名
+            input#username(type="text",name="username")
+            span.error
+
+        div.field
+            lable(for="password") 密码
+            input#password(type="text",name="password")
+            span.error
+        div.field
+            input#reset(type="reset",value="重置")
+            input#submit(type="submit",value="提交")
+            a(href="/signup")
+                input(type="button",value="注册")
