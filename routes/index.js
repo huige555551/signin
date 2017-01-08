@@ -9,7 +9,6 @@ router.get('/signup', function(req, res, next) {
 });
 
 router.post('/signup', function(req, res, next) {
-
     var user = req.body;
     req.session.user = user;
     var userEntity = new User(user);
@@ -17,19 +16,18 @@ router.post('/signup', function(req, res, next) {
             $or: [{ 'username': user.username }, { 'studentId': user.studentId },
                 { 'telephone': user.telephone }, { "email": user.email }
             ]
-        })
+        }).exec()
         .then(function(docs) {
             if (docs)
                 res.render('signup', { title: '注册', error: '重复注册消息' });
-
             else {
-                userEntity.save(function(err, data) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log("Save", data);
-                    }
-                });
+            userEntity.save(function(err, data) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("Save", data);
+                }
+            });
                 res.redirect("/detail");
             }
         });
